@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Домашняя страница</title>
+    <title>Рецепты</title>
 </head>
 <body>
-    <h1>Выберите раздел</h1>
-    {% for title, url in pages.items %}
-        <a href="{{ url }}">{{ title }}</a>
+    <h1>Выберите блюдо</h1>
+    {% for dish, recipe in pages.items %}
+        <a href="{{ dish }}/?name={{ dish }}">{{ dish }}</a>
         <br>
     {% endfor %}
 </body>

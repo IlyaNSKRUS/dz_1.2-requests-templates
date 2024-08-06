@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 
 DATA = {
     'omlet': {
@@ -16,26 +16,30 @@ DATA = {
         'сыр, ломтик': 1,
         'помидор, ломтик': 1,
     },
-    # можете добавить свои рецепты ;)
 }
 
 
-def dish_view(request):
-    dish = request.GET.get('name')
-    # print('dish: ', dish)
-    recipe = DATA[dish]
-    # print('recipe: ',recipe)
-    context = {dish : recipe}
-    # print('context: ', context)
+def home_view(request):
+
+    context = {
+        'pages': DATA
+    }
+    return render(request, 'calculator/home.html', context)
+
+def recipe_view(request):
+    recipe = request.GET.get('name')
+    portion = request.GET.get('servings')
+
+    if portion == None:
+        context = {'recipe': DATA[recipe], 'portion': 1}
+    else:
+        number = int(portion)
+        temp = {}
+        print(type(number),number)
+        for key, value in DATA[recipe].items():
+            temp[key] = round(value * number, 2)
+            print('temp', temp)
+        context = {'recipe': temp,'portion': portion}
+
 
     return render(request, 'calculator/index.html', context)
-
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
