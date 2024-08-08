@@ -11,7 +11,7 @@ def index(request):
 def bus_stations(request):
     # получите текущую страницу и передайте ее в контекст
     # также передайте в контекст список станций на странице
-    with open('C:/Users/Desktop/dz_django/dj-homeworks/1.2-requests-templates/pagination/data-398-2018-08-30.csv', 'r', encoding='utf-8') as file:
+    with open('C:/Users/adminlocal/Desktop/dz_django/dj-homeworks/1.2-requests-templates/pagination/data-398-2018-08-30.csv', 'r', encoding='utf-8') as file:
         bus_stations_ = []
         for row in csv.DictReader(file):
             bus_stations_.append(row)
@@ -21,6 +21,7 @@ def bus_stations(request):
 
     context = {
         'bus_stations': page,
+        'page': page,
 
     }
     return render(request, 'stations/index.html', context)
