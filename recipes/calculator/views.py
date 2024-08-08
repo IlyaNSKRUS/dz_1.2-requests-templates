@@ -26,7 +26,7 @@ def home_view(request):
     }
     return render(request, 'calculator/home.html', context)
 
-def recipe_view(request):
+def recipe_view(request, dish):
     recipe = request.GET.get('name')
     portion = request.GET.get('servings')
 

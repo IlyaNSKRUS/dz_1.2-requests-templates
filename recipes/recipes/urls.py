@@ -21,9 +21,6 @@ from calculator.views import home_view, recipe_view
 urlpatterns = [
     # здесь зарегистрируйте вашу view-функцию
     path('', home_view, name='home'),
-    path('omlet/', recipe_view, name='omlet'),
-    path('pasta/', recipe_view, name='pasta'),
-    path('buter/', recipe_view, name='buter'),
-
+    path('<dish>/', recipe_view, name='dish'),
 ]
 
